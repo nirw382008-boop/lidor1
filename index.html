@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>שאלה חשובה</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffd1dc, #fff);
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 30px 50px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      text-align: center;
+      position: relative;
+      width: 320px;
+      max-width: 90vw;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      position: absolute;
+      padding: 12px 22px;
+      font-size: 16px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s ease, left 0.2s ease, top 0.2s ease;
+    }
+
+    #yes {
+      background: #4caf50;
+      color: white;
+      left: 50%;
+      top: 50%;
+      transform: translate(-120%, -50%);
+    }
+
+    #no {
+      background: #f44336;
+      color: white;
+      left: 50%;
+      top: 50%;
+      transform: translate(20%, -50%);
+    }
+
+    .message {
+      margin-top: 25px;
+      font-size: 20px;
+      color: #e91e63;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>את באה אליי? ❤️</h1>
+
+    <div class="buttons" id="buttons">
+      <button id="yes">כן</button>
+      <button id="no">לא</button>
+    </div>
+
+    <div class="message" id="message">ידעתי 🥰</div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+    const container = document.getElementById('buttons');
+    const message = document.getElementById('message');
+
+    let yesScale = 1;
+
+    function moveNoButton() {
+      const maxX = container.clientWidth - noBtn.offsetWidth;
+      const maxY = container.clientHeight - noBtn.offsetHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+      noBtn.style.transform = 'none';
+
+      yesScale += 0.15;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', moveNoButton);
+
+    yesBtn.addEventListener('click', () => {
+      message.style.display = 'block';
+      noBtn.style.display = 'none';
+      yesBtn.style.left = '50%';
+      yesBtn.style.top = '50%';
+      yesBtn.style.transform = 'translate(-50%, -50%) scale(1.2)';
+    });
+  </script>
+</body>
+</html>
